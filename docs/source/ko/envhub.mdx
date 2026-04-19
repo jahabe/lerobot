@@ -142,7 +142,7 @@ print(f"Observation shape: {obs.shape if hasattr(obs, 'shape') else type(obs)}")
 env.close()
 ```
 
-### 3단: 허브에 업로드
+### 3단계: 허브에 업로드
 
 허깅 페이스에 저장소를 업로드합니다:
 
@@ -241,23 +241,23 @@ env = make_env("username/my-env@v1.0:envs/task_a.py", trust_remote_code=True)
 envs_dict = make_env(
     "username/my-env",
     n_envs=8,
-    use_async_envs=True,  # Use AsyncVectorEnv for parallel execution
+    use_async_envs=True,  # 병령 실행을 위해 AsyncVectorEnv 사용
     trust_remote_code=True
 )
 ```
 
-## URL Format Reference
+## URL 형식 참고
 
-The hub URL format supports several patterns:
+허브 URL 형식은 다음 패턴을 지원합니다:
 
-| Pattern              | Description                    | Example                                |
+| 패턴                  | 설명                           | 예시                                |
 | -------------------- | ------------------------------ | -------------------------------------- |
-| `user/repo`          | Load `env.py` from main branch | `make_env("lerobot/pusht-env")`        |
-| `user/repo@revision` | Load from specific revision    | `make_env("lerobot/pusht-env@main")`   |
-| `user/repo:path`     | Load custom file               | `make_env("lerobot/envs:pusht.py")`    |
-| `user/repo@rev:path` | Revision + custom file         | `make_env("lerobot/envs@v1:pusht.py")` |
+| `user/repo`          | 메인 브랜치에서 `env.py` 불러오기 | `make_env("lerobot/pusht-env")`        |
+| `user/repo@revision` | 특정 리비전에서 불러오기          | `make_env("lerobot/pusht-env@main")`   |
+| `user/repo:path`     | 커스텀 파일 불러오기              | `make_env("lerobot/envs:pusht.py")`    |
+| `user/repo@rev:path` | 리비전 + 커스텀 파일             | `make_env("lerobot/envs@v1:pusht.py")` |
 
-## Multi-Task Environments
+## 멀티태스크 환경
 
 For benchmarks with multiple tasks (like LIBERO), return a nested dictionary:
 
