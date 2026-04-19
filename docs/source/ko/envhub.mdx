@@ -98,43 +98,43 @@ import gymnasium as gym
 
 def make_env(n_envs: int = 1, use_async_envs: bool = False):
     """
-    Create vectorized environments for your custom task.
+    커스텀 태스크용 백터화 환경을 생성합니다. 
 
     Args:
-        n_envs: Number of parallel environments
-        use_async_envs: Whether to use AsyncVectorEnv or SyncVectorEnv
+        n_envs: 병렬 환경 수 
+        use_async_envs: AsyncVectorEnv 또는 SyncVectorEnv 사용 여부
 
     Returns:
-        gym.vector.VectorEnv or dict mapping suite names to vectorized envs
+        gym.vector.VectorEnv 또는 suite 이름을 백터화 환경에 매핑하는 딕셔너리
     """
     def _make_single_env():
-        # Create your custom environment
+        # 커스텀 환경 생성
         return gym.make("CartPole-v1")
 
-    # Choose vector environment type
+    # 백터 환경 타입 선택
     env_cls = gym.vector.AsyncVectorEnv if use_async_envs else gym.vector.SyncVectorEnv
 
-    # Create vectorized environment
+    # 벡터화된 환경 선택
     vec_env = env_cls([_make_single_env for _ in range(n_envs)])
 
     return vec_env
 ```
 
-### Step 2: Test Locally
+### 2단계: 로컬에서 테스트 
 
-Before uploading, test your environment locally:
+업로드 전에 로컬에서 환경을 테스트합니다:
 
 ```python
 from lerobot.envs.utils import _load_module_from_path, _call_make_env, _normalize_hub_result
 
-# Load your module
+# 모듈 불러오기
 module = _load_module_from_path("./env.py")
 
-# Test the make_env function
+# make_env 함수 테스트
 result = _call_make_env(module, n_envs=2, use_async_envs=False)
 normalized = _normalize_hub_result(result)
 
-# Verify it works
+# 동작 확인
 suite_name = next(iter(normalized))
 env = normalized[suite_name][0]
 obs, info = env.reset()
@@ -142,21 +142,21 @@ print(f"Observation shape: {obs.shape if hasattr(obs, 'shape') else type(obs)}")
 env.close()
 ```
 
-### Step 3: Upload to the Hub
+### 3단: 허브에 업로드
 
-Upload your repository to Hugging Face:
+허깅 페이스에 저장소를 업로드합니다:
 
 ```bash
-# Install huggingface_hub if needed
+# huggingface_hub 설치 (필요한 경우)
 pip install huggingface_hub
 
-# Login to Hugging Face
+# 허깅 페이스 로그인
 hf auth login
 
-# Create a new repository
+# 새 저장소 생성
 hf repo create my-org/my-custom-env
 
-# Initialize git and push
+# git 초기화 및 푸시
 git init
 git add .
 git commit -m "Initial environment implementation"
@@ -164,17 +164,17 @@ git remote add origin https://huggingface.co/my-org/my-custom-env
 git push -u origin main
 ```
 
-Alternatively, use the `huggingface_hub` Python API:
+또는 `huggingface_hub` Python API를 사용할 수도 있습니다:
 
 ```python
 from huggingface_hub import HfApi
 
 api = HfApi()
 
-# Create repository
+# 저장소 생성
 api.create_repo("my-custom-env", repo_type="space")
 
-# Upload files
+# 파일 업로드
 api.upload_folder(
     folder_path="./my-env-folder",
     repo_id="username/my-custom-env",
@@ -182,60 +182,60 @@ api.upload_folder(
 )
 ```
 
-## Loading Environments from the Hub
+## 허브에서 환경 불러오기
 
-### Basic Usage
+### 기본 사용법
 
 ```python
 from lerobot.envs import make_env
 
-# Load from the hub
+# 허브에서 불러오기
 envs_dict = make_env(
     "username/my-custom-env",
     n_envs=4,
     trust_remote_code=True
 )
 
-# Access the environment
+# 환경 접근
 suite_name = next(iter(envs_dict))
 env = envs_dict[suite_name][0]
 
-# Use it like any gym environment
+# 일반 gym 환경처럼 사용
 obs, info = env.reset()
 action = env.action_space.sample()
 obs, reward, terminated, truncated, info = env.step(action)
 ```
 
-### Advanced: Pinning to Specific Versions
+### 고급: 특정 버전 고정
 
-For reproducibility and security, pin to a specific Git revision:
+재현성과 보안을 위해 특정 Git 리비전을 지정합니다: 
 
 ```python
-# Pin to a specific branch
+# 특정 브랜치 고정
 env = make_env("username/my-env@main", trust_remote_code=True)
 
-# Pin to a specific commit (recommended for papers/experiments)
+# 특정 커밋 고정 (논문/실험에 권장)
 env = make_env("username/my-env@abc123def456", trust_remote_code=True)
 
-# Pin to a tag
+# 태그 고정
 env = make_env("username/my-env@v1.0.0", trust_remote_code=True)
 ```
 
-### Custom File Paths
+### 커스텀 파일 경로
 
-If your environment definition is not in `env.py`:
+환경 정의가 `env.py`에 없는 경우:
 
 ```python
-# Load from a custom file
+# 커스텀 파일에서 불러오기
 env = make_env("username/my-env:custom_env.py", trust_remote_code=True)
 
-# Combine with version pinning
+# 고정된 버전과 함께 사용
 env = make_env("username/my-env@v1.0:envs/task_a.py", trust_remote_code=True)
 ```
 
-### Async Environments
+### 비동기 환경
 
-For better performance with multiple environments:
+여러 환경을 병렬로 실행할 때 성능을 높이려면:
 
 ```python
 envs_dict = make_env(
