@@ -90,6 +90,7 @@ from lerobot.utils.constants import (
     TRAINING_STATE_DIR,
 )
 from lerobot.utils.device_utils import get_safe_torch_device
+from lerobot.utils.process import ProcessSignalHandler
 from lerobot.utils.random_utils import set_seed
 from lerobot.utils.transition import move_state_dict_to_device, move_transition_to_device
 from lerobot.utils.utils import (
@@ -99,7 +100,6 @@ from lerobot.utils.utils import (
 
 from .buffer import ReplayBuffer, concatenate_batch_transitions
 from .learner_service import MAX_WORKERS, SHUTDOWN_TIMEOUT, LearnerService
-from .process import ProcessSignalHandler
 
 
 @parser.wrap()
@@ -218,30 +218,33 @@ def start_learner_threads(
     )
     communication_process.start()
 
-    add_actor_information_and_train(
-        cfg=cfg,
-        wandb_logger=wandb_logger,
-        shutdown_event=shutdown_event,
-        transition_queue=transition_queue,
-        interaction_message_queue=interaction_message_queue,
-        parameters_queue=parameters_queue,
-    )
-    logging.info("[LEARNER] Training process stopped")
+    try:
+        add_actor_information_and_train(
+            cfg=cfg,
+            wandb_logger=wandb_logger,
+            shutdown_event=shutdown_event,
+            transition_queue=transition_queue,
+            interaction_message_queue=interaction_message_queue,
+            parameters_queue=parameters_queue,
+        )
+        logging.info("[LEARNER] Training process stopped")
+    except Exception:
+        logging.exception("[LEARNER] Unhandled exception in training loop")
+        shutdown_event.set()
+    finally:
+        logging.info("[LEARNER] Closing queues")
+        transition_queue.close()
+        interaction_message_queue.close()
+        parameters_queue.close()
 
-    logging.info("[LEARNER] Closing queues")
-    transition_queue.close()
-    interaction_message_queue.close()
-    parameters_queue.close()
+        communication_process.join()
+        logging.info("[LEARNER] Communication process joined")
 
-    communication_process.join()
-    logging.info("[LEARNER] Communication process joined")
+        transition_queue.cancel_join_thread()
+        interaction_message_queue.cancel_join_thread()
+        parameters_queue.cancel_join_thread()
 
-    logging.info("[LEARNER] join queues")
-    transition_queue.cancel_join_thread()
-    interaction_message_queue.cancel_join_thread()
-    parameters_queue.cancel_join_thread()
-
-    logging.info("[LEARNER] queues closed")
+        logging.info("[LEARNER] Cleanup complete")
 
 
 # Core algorithm functions
