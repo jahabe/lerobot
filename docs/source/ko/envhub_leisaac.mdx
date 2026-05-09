@@ -4,7 +4,7 @@ LeRobot EnvHub가 이제 LeIsaac을 통한 **시뮬레이션 내 모방 학습**
 
 [LeIsaac](https://github.com/LightwheelAI/leisaac)은 IsaacLab 및 SO101 리더/팔로워 구성과 통합되어 다음을 제공합니다:
 
-- 🕹️ 데이터 수집을 위한 **텔레오퍼레이션 우선 워크플로우**
+- 🕹️ 데이터 수집의 초적화를 위한 **텔레오퍼레이션 우선 워크플로우**
 - 📦 LeRobot 학습에 바로 사용 가능한 **내장 데이터 변환**
 - 🤖 오렌지 잡기, 큐브 들어올리기, 테이블 정리, 천 접기 등 **일상적인 스킬**
 - ☁️ 클라우드 시뮬레이션, EnvHub 지원, Sim2Real 도구 등 [LightWheel](https://lightwheel.ai/)의 **지속적인 업그레이드**
@@ -13,26 +13,26 @@ LeRobot EnvHub가 이제 LeIsaac을 통한 **시뮬레이션 내 모방 학습**
 
 # 사용 가능한 환경
 
-The following table lists all available tasks and environments in LeIsaac x LeRobot Envhub. You can also get the latest list of environments by running the following command:
+아래 표는 LeIsaac x LeRobot EnvHub에서 사용 가능한 모든 태스크와 환경을 보여줍니다. 다음 명령어를 실행하면 최신 환경 목록을 확인할 수 있습니다:
 
 ```bash
 python scripts/environments/list_envs.py
 ```
 
-| Task                                                                                                                                                            | Environment ID                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | Task Description                                                                                                           | Related Robot                                              |
+| 태스크                                                                                                                                                            | 환경 ID                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | 태스크 설명                                                                                                           | 관련 로봇                                              |
 | :-------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------- |
-| <video src="https://github.com/user-attachments/assets/466eddff-f720-4f99-94d5-5e123e4c302c" autoplay loop muted playsinline style="max-width: 300px;"></video> | [LeIsaac-SO101-PickOrange-v0](https://github.com/LightwheelAI/leisaac/blob/main/source/leisaac/leisaac/tasks/pick_orange/pick_orange_env_cfg.py)<br /><br />[LeIsaac-SO101-PickOrange-Direct-v0](https://github.com/LightwheelAI/leisaac/blob/main/source/leisaac/leisaac/tasks/pick_orange/direct/pick_orange_env.py)                                                                                                                                                                                                                        | Pick three oranges and put them into the plate, then reset the arm to rest state.                                          | Single-Arm SO101 Follower                                  |
-| <video src="https://github.com/user-attachments/assets/1e4eb83a-0b38-40fb-a0b2-ddb0fe201e6d" autoplay loop muted playsinline style="max-width: 300px;"></video> | [LeIsaac-SO101-LiftCube-v0](https://github.com/LightwheelAI/leisaac/blob/main/source/leisaac/leisaac/tasks/lift_cube/lift_cube_env_cfg.py)<br /><br />[LeIsaac-SO101-LiftCube-Direct-v0](https://github.com/LightwheelAI/leisaac/blob/main/source/leisaac/leisaac/tasks/lift_cube/direct/lift_cube_env.py)                                                                                                                                                                                                                                    | Lift the red cube up.                                                                                                      | Single-Arm SO101 Follower                                  |
-| <video src="https://github.com/user-attachments/assets/e49d8f1c-dcc9-412b-a88f-100680d8a45b" autoplay loop muted playsinline style="max-width: 300px;"></video> | [LeIsaac-SO101-CleanToyTable-v0](https://github.com/LightwheelAI/leisaac/blob/main/source/leisaac/leisaac/tasks/clean_toy_table/clean_toy_table_env_cfg.py)<br /><br />[LeIsaac-SO101-CleanToyTable-BiArm-v0](https://github.com/LightwheelAI/leisaac/blob/main/source/leisaac/leisaac/tasks/clean_toy_table/clean_toy_table_bi_arm_env_cfg.py)<br /><br />[LeIsaac-SO101-CleanToyTable-BiArm-Direct-v0](https://github.com/LightwheelAI/leisaac/blob/main/source/leisaac/leisaac/tasks/clean_toy_table/direct/clean_toy_table_bi_arm_env.py) | Pick two letter e objects into the box, and reset the arm to rest state.                                                   | Single-Arm SO101 Follower<br /><br />Bi-Arm SO101 Follower |
-| <video src="https://github.com/user-attachments/assets/e29a0f8a-9286-4ce6-b45d-342c3d3ba754" autoplay loop muted playsinline style="max-width: 300px;"></video> | [LeIsaac-SO101-FoldCloth-BiArm-v0](https://github.com/LightwheelAI/leisaac/blob/main/source/leisaac/leisaac/tasks/fold_cloth/fold_cloth_bi_arm_env_cfg.py)<br /><br />[LeIsaac-SO101-FoldCloth-BiArm-Direct-v0](https://github.com/LightwheelAI/leisaac/blob/main/source/leisaac/leisaac/tasks/fold_cloth/direct/fold_cloth_bi_arm_env.py)                                                                                                                                                                                                    | Fold the cloth, and reset the arm to rest state.<br /><br />_Note: Only the DirectEnv support check_success in this task._ | Bi-Arm SO101 Follower                                      |
+| <video src="https://github.com/user-attachments/assets/466eddff-f720-4f99-94d5-5e123e4c302c" autoplay loop muted playsinline style="max-width: 300px;"></video> | [LeIsaac-SO101-PickOrange-v0](https://github.com/LightwheelAI/leisaac/blob/main/source/leisaac/leisaac/tasks/pick_orange/pick_orange_env_cfg.py)<br /><br />[LeIsaac-SO101-PickOrange-Direct-v0](https://github.com/LightwheelAI/leisaac/blob/main/source/leisaac/leisaac/tasks/pick_orange/direct/pick_orange_env.py)                                                                                                                                                                                                                        | 오렌지 세 개를 집어 접시에 담은 다음, 팔을 초기 상태로 되돌립니다.                                          | Single-Arm SO101 Follower                                  |
+| <video src="https://github.com/user-attachments/assets/1e4eb83a-0b38-40fb-a0b2-ddb0fe201e6d" autoplay loop muted playsinline style="max-width: 300px;"></video> | [LeIsaac-SO101-LiftCube-v0](https://github.com/LightwheelAI/leisaac/blob/main/source/leisaac/leisaac/tasks/lift_cube/lift_cube_env_cfg.py)<br /><br />[LeIsaac-SO101-LiftCube-Direct-v0](https://github.com/LightwheelAI/leisaac/blob/main/source/leisaac/leisaac/tasks/lift_cube/direct/lift_cube_env.py)                                                                                                                                                                                                                                    | 빨간 큐브를 들어올립니다.                                                                                                      | Single-Arm SO101 Follower                                  |
+| <video src="https://github.com/user-attachments/assets/e49d8f1c-dcc9-412b-a88f-100680d8a45b" autoplay loop muted playsinline style="max-width: 300px;"></video> | [LeIsaac-SO101-CleanToyTable-v0](https://github.com/LightwheelAI/leisaac/blob/main/source/leisaac/leisaac/tasks/clean_toy_table/clean_toy_table_env_cfg.py)<br /><br />[LeIsaac-SO101-CleanToyTable-BiArm-v0](https://github.com/LightwheelAI/leisaac/blob/main/source/leisaac/leisaac/tasks/clean_toy_table/clean_toy_table_bi_arm_env_cfg.py)<br /><br />[LeIsaac-SO101-CleanToyTable-BiArm-Direct-v0](https://github.com/LightwheelAI/leisaac/blob/main/source/leisaac/leisaac/tasks/clean_toy_table/direct/clean_toy_table_bi_arm_env.py) | 알파벳 'e' 모양 물체 두 개를 박스에 넣고, 팔을 초기 상태로 되돌립니다.                                                    | Single-Arm SO101 Follower<br /><br />Bi-Arm SO101 Follower |
+| <video src="https://github.com/user-attachments/assets/e29a0f8a-9286-4ce6-b45d-342c3d3ba754" autoplay loop muted playsinline style="max-width: 300px;"></video> | [LeIsaac-SO101-FoldCloth-BiArm-v0](https://github.com/LightwheelAI/leisaac/blob/main/source/leisaac/leisaac/tasks/fold_cloth/fold_cloth_bi_arm_env_cfg.py)<br /><br />[LeIsaac-SO101-FoldCloth-BiArm-Direct-v0](https://github.com/LightwheelAI/leisaac/blob/main/source/leisaac/leisaac/tasks/fold_cloth/direct/fold_cloth_bi_arm_env.py)                                                                                                                                                                                                    | 천을 접고, 팔을 초기 상태로 되돌립니다.<br /><br />_참고: 이 태스크에서 check_success는 DirectEnv에서만 지원됩니다._ | Bi-Arm SO101 Follower                                      |
 
-# Load LeIsaac directly in LeRobot with one line of code
+# 코드 한 줄로 LeRobot에서 LeIsaac 바로 사용하기
 
-> EnvHub: Share LeIsaac environments through HuggingFace
+> EnvHub: HuggingFace를 통해 LeIsaac 환경 공유하기
 
-[EnvHub](https://huggingface.co/docs/lerobot/envhub) is our reproducible environment hub, spin up a packaged simulation with one line, experiment immediately, and publish your own tasks for the community.
+[EnvHub](https://huggingface.co/docs/lerobot/envhub)는 재현 가능한 환경 허브입니다. 코드 한 줄로 패키지된 시뮬레이션을 실행하고, 즉시 실험하며, 커뮤니티에 직접 태스크를 게시할 수 있습니다.
 
-LeIsaac offers EnvHub support so you can consume or share tasks with only a few commands.
+LeIsaac은 EnvHub를 지원하므로 몇 가지 명령어만으로 태스크를 사용하거나 공유할 수 있습니다.
 
 <video
   controls
@@ -40,12 +40,12 @@ LeIsaac offers EnvHub support so you can consume or share tasks with only a few 
   style={{ width: "100%", maxWidth: "960px", borderRadius: "8px" }}
 />
 
-## How to get started, environment Setup
+## 환경 설정 시작하기
 
-Run the following commands to setup your code environments:
+아래 명령어를 실행하여 코드 환경을 설정합니다:
 
 ```bash
-# Refer to Getting Started/Installation to install leisaac firstly
+# leisaac 설치는 시작하기/설치 가이드를 먼저 참고하세요
 conda create -n leisaac_envhub python=3.11
 conda activate leisaac_envhub
 
@@ -53,21 +53,21 @@ conda install -c "nvidia/label/cuda-12.8.1" cuda-toolkit
 pip install -U torch==2.7.0 torchvision==0.22.0 --index-url https://download.pytorch.org/whl/cu128
 pip install 'leisaac[isaaclab] @ git+https://github.com/LightwheelAI/leisaac.git#subdirectory=source/leisaac' --extra-index-url https://pypi.nvidia.com
 
-# Install lerobot
+# lerobot 설치
 pip install lerobot==0.4.1
 
-# Fix numpy version
+# numpy 버전 고정
 pip install numpy==1.26.0
 ```
 
-## Usage Example
+## 사용 예시
 
-EnvHub exposes every LeIsaac-supported task in a uniform interface. The examples below load `so101_pick_orange` and demonstrate a random-action rollout and an interactive teleoperation.
+EnvHub는 LeIsaac에서 지원하는 모든 태스크를 동일한 인터페이스로 제공합니다. 아래 예시는 `so101_pick_orange`를 불러와 랜덤 액션 롤아웃과 인터랙티브 텔레오퍼레이션을 수행합니다.
 
-### Random Action
+### 랜덤 액션
 
 <details>
-<summary>Click to expand code example</summary>
+<summary>코드 예시 펼치기</summary>
 
 ```python
 # envhub_random_action.py
@@ -75,16 +75,16 @@ EnvHub exposes every LeIsaac-supported task in a uniform interface. The examples
 import torch
 from lerobot.envs import make_env
 
-# Load from the hub
+# Hub에서 환경 불러오기
 envs_dict = make_env("LightwheelAI/leisaac_env:envs/so101_pick_orange.py", n_envs=1, trust_remote_code=True)
 
-# Access the environment
+# 환경 접근
 suite_name = next(iter(envs_dict))
 sync_vector_env = envs_dict[suite_name][0]
 # retrieve the isaac environment from the sync vector env
 env = sync_vector_env.envs[0].unwrapped
 
-# Use it like any gym environment
+# 일반 gym 환경처럼 사용
 obs, info = env.reset()
 
 while True:
@@ -102,13 +102,13 @@ env.close()
 python envhub_random_action.py
 ```
 
-You should see the SO101 arm swinging under purely random commands.
+스크립트를 실행하면 SO101 암이 완전한 랜덤 명령으로 움직이는 것을 확인할 수 있습니다.
 
-### Teleoperation
+### 텔레오퍼레이션
 
-LeRobot’s teleoperation stack can drive the simulated arm.
+LeRobot의 텔레오퍼레이션 스택으로 시뮬레이션 암을 조작할 수 있습니다.
 
-Connect the SO101 Leader controller, run the calibration command below.
+SO101 리더 컨트롤러를 연결하고 아래 캘리브레이션 명령어를 실행합니다.
 
 ```bash
 lerobot-calibrate \
@@ -117,10 +117,10 @@ lerobot-calibrate \
     --teleop.id=leader
 ```
 
-And then launch the teleop script.
+이후 텔레오퍼레이션 스크립트를 실행합니다.
 
 <details>
-<summary>Click to expand code example</summary>
+<summary>코드 예시 펼치기</summary>
 
 ```python
 # envhub_teleop_example.py
@@ -243,29 +243,29 @@ if __name__ == "__main__":
 python envhub_teleop_example.py
 ```
 
-Running the script lets you operate the simulated arm using the physical Leader device.
+스크립트를 실행하면 물리적 리더 장치로 시뮬레이션 암을 직접 조작할 수 있습니다.
 
-## ☁️ Cloud Simulation (No GPU Required)
+## ☁️ 클라우드 시뮬레이션 (GPU 불필요)
 
-Don’t have a local GPU or the right drivers? No problem! You can run LeIsaac entirely in the cloud with zero setup.
-LeIsaac works out-of-the-box on **NVIDIA Brev**, giving you a fully configured environment directly in your browser.
+로컬 GPU나 적합한 드라이버가 없어도 괜찮습니다! LeIsaac은 별도 설정 없이 클라우드에서 완전히 실행할 수 있습니다.
+LeIsaac은 **NVIDIA Brev**에서 바로 동작하며, 브라우저에서 완전히 구성된 환경을 제공합니다.
 
-👉 **Start here:** [https://lightwheelai.github.io/leisaac/docs/cloud_simulation/nvidia_brev](https://lightwheelai.github.io/leisaac/docs/cloud_simulation/nvidia_brev)
+👉 **시작하기:** [https://lightwheelai.github.io/leisaac/docs/cloud_simulation/nvidia_brev](https://lightwheelai.github.io/leisaac/docs/cloud_simulation/nvidia_brev)
 
-Once your instance is deployed, simply open the link for **port 80 (HTTP)** to launch **Visual Studio Code Server** (default password: `password`). From there, you can run simulations, edit code, and visualize IsaacLab environments — all from your web browser.
+인스턴스가 배포되면 **포트 80 (HTTP)** 링크를 열어 **비주얼 스튜디오 코드 서버**를 실행합니다 (기본 비밀번호: `password`). 이후 웹 브라우저에서 시뮬레이션 실행, 코드 편집, IsaacLab 환경 시각화를 모두 수행할 수 있습니다.
 
-**No GPU, no drivers, no local installation. Just click and run.**
+**GPU도, 드라이버도, 로컬 설치도 필요 없습니다. 클릭 한 번으로 바로 실행됩니다.**
 
-## Additional Notes
+## 추가 참고사항
 
-We keep EnvHub coverage aligned with the LeIsaac task. Currently supported:
+EnvHub는 LeIsaac 태스크와 동기화하여 지원을 유지합니다. 현재 지원되는 태스크:
 
 - `so101_pick_orange`
 - `so101_lift_cube`
 - `so101_clean_toytable`
 - `bi_so101_fold_cloth`
 
-Switch tasks by targeting a different script when calling `make_env`, for example:
+`make_env` 호출 시 다른 스크립트를 지정하면 태스크를 전환할 수 있습니다:
 
 ```python
 envs_dict_pick_orange = make_env("LightwheelAI/leisaac_env:envs/so101_pick_orange.py", n_envs=1, trust_remote_code=True)
@@ -274,28 +274,28 @@ envs_dict_clean_toytable = make_env("LightwheelAI/leisaac_env:envs/so101_clean_t
 envs_dict_fold_cloth = make_env("LightwheelAI/leisaac_env:envs/bi_so101_fold_cloth.py", n_envs=1, trust_remote_code=True)
 ```
 
-Note: when working with `bi_so101_fold_cloth`, call `initialize()` immediately after retrieving the env before performing any other operations:
+참고: `bi_so101_fold_cloth` 사용 시, 환경을 가져온 직후 다른 작업을 수행하기 전에 반드시 `initialize()`를 먼저 호출해야 합니다:
 
 <details>
-<summary>Click to expand code example</summary>
+<summary>코드 예시 펼치기</summary>
 
 ```python
 import torch
 from lerobot.envs import make_env
 
-# Load from the hub
+# Hub에서 환경 불러오기
 envs_dict = make_env("LightwheelAI/leisaac_env:envs/bi_so101_fold_cloth.py", n_envs=1, trust_remote_code=True)
 
-# Access the environment
+# 환경 접근
 suite_name = next(iter(envs_dict))
 sync_vector_env = envs_dict[suite_name][0]
 # retrieve the isaac environment from the sync vector env
 env = sync_vector_env.envs[0].unwrapped
 
-# NOTE: initialize() first
+# 참고: initialize()를 먼저 호출해야 합니다
 env.initialize()
 
-# other operation with env...
+# env 관련 작업 수행...
 ```
 
 </details>
